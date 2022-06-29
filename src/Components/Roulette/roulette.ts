@@ -1,4 +1,3 @@
-// КЛАСС ОРУЖИЯ
 export interface weaponAttributes {
     weapon_name: string,
     skin_name: string
@@ -6,6 +5,7 @@ export interface weaponAttributes {
     steam_image: string
 }
 
+// КЛАСС ОРУЖИЯ
 export class Weapon {
     id: number
     weapon_name: string
@@ -33,8 +33,8 @@ export class Weapon {
 }
 
 export interface rouletteAttributes {
-    weapon_prize_attrs: any
-    weapon_actors_attrs: any
+    weapon_prize_attrs: weaponAttributes
+    weapon_actors_attrs: weaponAttributes[]
     el_parent: HTMLElement | null
     beforeParty: () => void
     afterParty: () => void
@@ -287,6 +287,7 @@ export class Roulette {
             this.beforeParty();
 
             this.make_sound(this.startSound);
+
             this.el_weapons.style.left = '-' + rand_stop + 'px';
 
             // здесь попытка синхронизировать звук вращения с анимацией
@@ -308,6 +309,7 @@ export class Roulette {
 
         /** анимация остановилась
          значит, рулетка тоже  */
+
         this.el_weapons.addEventListener('transitionend', () => {
             clearInterval(sound_spin_interval);
             this.make_sound(this.stopSound);
@@ -324,7 +326,7 @@ export class Roulette {
     }
 
     /** ЗАПУСК
-     -----------------------------------------------------------------------------*/
+     * -----------------------------------------------------------------------------*/
     start = () => {
         // перед рендером нужно создать оружие из атрибутов
         this.set_weapons();

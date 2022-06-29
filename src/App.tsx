@@ -1,10 +1,19 @@
 import React from 'react';
 import cl from './App.module.scss';
 import weapons from "./weapons.json"
-import RouletteElement from "./Components/Roulette/Roulette";
+import RouletteElement from "./Components/Roulette/RouletteElement";
+
 
 function App() {
     let randomWeapon = weapons[Math.floor(Math.random() * weapons.length)];
+
+    function afterParty(){
+        console.log("Начало")
+    }
+
+    function beforeParty(){
+        console.log("Конец")
+    }
 
     return (
         <div className={cl.App}>
@@ -14,7 +23,12 @@ function App() {
             <h2 className={cl.sub_title}>
                 когда его напишут...
             </h2>
-            <RouletteElement weaponPrizeAttrs={randomWeapon} weaponActorsAttrs={weapons}/>
+            <RouletteElement
+                weaponPrizeAttrs={randomWeapon}
+                weaponActorsAttrs={weapons}
+                afterParty={afterParty}
+                beforeParty={beforeParty}
+            />
         </div>
     );
 }
