@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import "./roulette.scss"
+import cl from "./roulette.module.scss"
 import RouletteItem from "./RouletteItem/RouletteItem";
 import {weaponAttributes} from "./roulette";
 
@@ -19,10 +19,10 @@ const RouletteElement = ({rouletteWeapons, setIsSpin, weaponPrizeId}: RouletteEl
     }
 
     return (
-        <div id={"roulette-container"}>
-            <div id={"ev-roulette"}>
-                <div id={"ev-target"}></div>
-                <div id={"ev-weapons"} onTransitionEnd={transitionEndHandler}>
+        <div id={"roulette-container"} className={cl.rouletteContainer}>
+            <div className={cl.evRoulette}>
+                <div className={cl.evTarget}></div>
+                <div id={"ev-weapons"} className={cl.evWeapons} onTransitionEnd={transitionEndHandler}>
                     {rouletteWeapons.map((w, i) => {
                         return <RouletteItem
                             key={i}

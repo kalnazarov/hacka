@@ -34,6 +34,7 @@ export interface rouletteAttributes {
 
     weaponsCount?: number
     transitionDuration?: number
+    itemWidth?: number
 }
 
 // КЛАСС РУЛЕТКИ
@@ -51,6 +52,8 @@ export class Roulette {
     weaponPrizeId: number
 
     transitionDuration: number
+
+    itemWidth: number
 
     constructor(attrs: rouletteAttributes) {
         // атрибуты для генерации массива weapons
@@ -74,6 +77,8 @@ export class Roulette {
 
         this.transitionDuration = attrs.transitionDuration || 10
 
+        this.itemWidth = attrs.itemWidth || 200
+
         // звуки
         // this.startSound = 'sound/roulette_start.wav';
         // this.spinSound = 'sound/roulette_spin.wav';
@@ -93,8 +98,8 @@ export class Roulette {
      вот как оно выглядит
 
      +---+---+---+     +---+---+---+---+---+
-     | 0 | 1 | 2 | ... |L-5|L-4|L-3|L-2|L-1|
      +---+---+---+     +---+---+---+---+---+
+     | 0 | 1 | 2 | ... |L-5|L-4|L-3|L-2|L-1|
 
      L -- это N_WEAPONS
      (или после вызова метода 'set_weapons': this.weapons.length)
@@ -145,11 +150,13 @@ export class Roulette {
     /** ВРАЩЕНИЕ РУЛЕТКИ
      -----------------------------------------------------------------------------*/
     spin = () => {
-        let el_weapon_width_1_2 = Math.floor(200 / 2)
-        let el_weapon_width_1_20 = Math.floor(200 / 20)
+        let el_weapon_width_1_2 = Math.floor(this.itemWidth / 2)
+        let el_weapon_width_1_20 = Math.floor(this.itemWidth / 20)
+
+        //TODO составить формулу
 
         // рандомная координата остановки
-        let rand_stop = (this.weaponsCount - 5) * 200 +
+        const randStop = (this.weaponsCount - 5) * this.itemWidth +
             el_weapon_width_1_2 +
             this.randomRange(el_weapon_width_1_20, (18 * el_weapon_width_1_20))
 
@@ -160,7 +167,7 @@ export class Roulette {
         // немного отложенный старт
         // (ибо нельзя сразу установить css-свойство 'left')
         setTimeout(() => {
-            this.weaponWrapper!.style.left = '-' + rand_stop + 'px';
+            this.weaponWrapper!.style.left = '-' + randStop + 'px';
         }, 100);
 
         return this.weaponPrizeId

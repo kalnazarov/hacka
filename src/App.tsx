@@ -8,11 +8,12 @@ import {Roulette, weaponAttributes} from "./Components/Roulette/roulette";
 function App() {
     const [isSpin, setIsSpin] = useState<boolean>(false)
     const [rouletteWeapons, setRouletteWeapons] = useState<weaponAttributes[]>(weapons)
-    const [weaponPrizeId, setWeaponPrizeId] = useState<number | null>(null)
+    const weaponsCount = 50
+    const transitionDuration = 5
 
     function play() {
         let winner = weapons[Math.floor(Math.random() * weapons.length)];
-
+        console.log(winner)
         const rouletteWrapper = document.getElementById('roulette-container')
         const weaponWrapper = document.getElementById('ev-weapons')
 
@@ -21,17 +22,15 @@ function App() {
             weapons,
             rouletteWrapper,
             weaponWrapper,
-            weaponsCount: 100,
-            transitionDuration: 5
+            weaponsCount: weaponsCount,
+            transitionDuration: transitionDuration
         });
 
         roulette.set_weapons()
-
         setRouletteWeapons(roulette.weapons)
 
         setIsSpin(true)
-
-        setWeaponPrizeId(roulette.spin())
+        roulette.spin()
     }
 
     return (
@@ -45,7 +44,8 @@ function App() {
             <RouletteElement
                 setIsSpin={setIsSpin}
                 rouletteWeapons={rouletteWeapons}
-                weaponPrizeId={weaponPrizeId}
+                // TODO избавиться от хардкода
+                weaponPrizeId={weaponsCount - 3}
             />
             <button disabled={isSpin} onClick={play}>Play</button>
         </div>
