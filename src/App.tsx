@@ -9,18 +9,25 @@ function App() {
     const [isSpin, setIsSpin] = useState<boolean>(false)
     const [rouletteWeapons, setRouletteWeapons] = useState<weaponAttributes[]>(weapons)
     const [weaponPrizeId, setWeaponPrizeId] = useState<number>(-1)
-    const weaponsCount = 50
-    const transitionDuration = 5
+    const [isReplay, setIsReplay] = useState<boolean>(false)
+    const weaponsCount = 150
+    const transitionDuration = 15
+
+    const rouletteWrapper = document.getElementById('roulette-container')
+    const weaponWrapper = document.getElementById('ev-weapons')
 
     useEffect(() => {
         load()
     }, [])
 
+    function prepare() {
+        weaponWrapper!.style.transition = "none"
+        weaponWrapper!.style.left = "0px"
+    }
+
     function load() {
-        console.log("loaded")
         let winner = weapons[Math.floor(Math.random() * weapons.length)];
-        const rouletteWrapper = document.getElementById('roulette-container')
-        const weaponWrapper = document.getElementById('ev-weapons')
+
 
         const roulette = new Roulette({
             winner,
@@ -38,11 +45,24 @@ function App() {
     }
 
     function play() {
-        console.log("lets play")
-        const roulette = load()
+        if (isReplay) {
+            prepare()
+            setIsSpin(true)
 
-        setIsSpin(true)
-        setWeaponPrizeId(roulette.spin())
+            setTimeout(() => {
+                const roulette = load()
+
+                setIsSpin(true)
+                setWeaponPrizeId(roulette.spin())
+                setIsReplay(true)
+            }, 1000)
+        } else {
+            const roulette = load()
+
+            setIsSpin(true)
+            setWeaponPrizeId(roulette.spin())
+            setIsReplay(true)
+        }
     }
 
     return (

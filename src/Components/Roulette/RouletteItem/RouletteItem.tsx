@@ -3,8 +3,6 @@ import cl from "./RouletteItem.module.scss"
 
 interface rouletteItemProps {
     id: number,
-    isSpinEnd: boolean,
-    isLoser: boolean,
     weapon_name: string,
     skin_name: string,
     rarity: string
@@ -13,15 +11,13 @@ interface rouletteItemProps {
 
 const RouletteItem = ({
                           id,
-                          isSpinEnd,
-                          isLoser,
                           weapon_name,
                           skin_name,
                           rarity,
                           steam_image,
                       }: rouletteItemProps) => {
     return (
-        <div className={cl.evWeapon} style={isSpinEnd && isLoser ? {opacity: "0.5"} : {opacity: "1"}}>
+        <div className={cl.evWeapon}>
             <div className={`${cl.evWeaponInner}`} id={String(id)}>
                 <div className={`${cl.evWeaponRarity} ${cl[rarity]}`}></div>
                 <img src={steam_image} alt={weapon_name}/>

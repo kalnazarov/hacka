@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import cl from "./roulette.module.scss"
 import RouletteItem from "./RouletteItem/RouletteItem";
 import {weaponAttributes} from "./roulette";
@@ -9,12 +9,9 @@ interface RouletteElementParams {
     weaponPrizeId: number | null
 }
 
-const RouletteElement = ({rouletteWeapons, setIsSpin, weaponPrizeId}: RouletteElementParams) => {
+const RouletteElement = ({rouletteWeapons, setIsSpin}: RouletteElementParams) => {
 
-    const [isSpinEnd, setIsSpinEnd] = useState<boolean>(false)
-
-    function transitionEndHandler(){
-        setIsSpinEnd(true)
+    function transitionEndHandler() {
         setIsSpin(false)
     }
 
@@ -27,8 +24,6 @@ const RouletteElement = ({rouletteWeapons, setIsSpin, weaponPrizeId}: RouletteEl
                         return <RouletteItem
                             key={i}
                             id={i}
-                            isSpinEnd={isSpinEnd}
-                            isLoser={i !== weaponPrizeId}
                             weapon_name={w.weapon_name}
                             skin_name={w.skin_name}
                             rarity={w.rarity}

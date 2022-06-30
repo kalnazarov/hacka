@@ -89,30 +89,6 @@ export class Roulette {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    /** ПАРАМЕТРЫ РУЛЕТКИ
-
-     N_WEAPONS -- это общее количество оружия в рулетке
-     (приз + возможно повторяющиеся актёры)
-
-     всего оружия должно быть не меньше 8 штук
-     вот как оно выглядит
-
-     +---+---+---+     +---+---+---+---+---+
-     +---+---+---+     +---+---+---+---+---+
-     | 0 | 1 | 2 | ... |L-5|L-4|L-3|L-2|L-1|
-
-     L -- это N_WEAPONS
-     (или после вызова метода 'set_weapons': this.weapons.length)
-
-     L-3 -- на этом месте оружие-приз */
-
-
-    /**  вопрос: что тут происходит?
-     ответ: - создаётся массив из N_WEAPONS-1 актёров
-     - позицию WEAPON_PRIZE_ID занимает приз */
-
-    /**    СОЗДАТЬ ОРУЖИЕ ИЗ АТРИБУТОВ
-     ----------------------------------------------------------------------------- */
     set_weapons = () => {
         let weapons: Weapon[] = [] // объявляем массив оружия
         let weapon_actors_len = this.allWeapons.length  // количество оружия пришедшее с бд
@@ -165,7 +141,7 @@ export class Roulette {
         // немного отложенный старт
         // (ибо нельзя сразу установить css-свойство 'left')
         setTimeout(() => {
-            this.weaponWrapper!.style.left = '-' + randStop + 'px';
+            this.weaponWrapper!.style.left = `-${randStop}px`;
         }, 100);
 
         return this.weaponPrizeId
