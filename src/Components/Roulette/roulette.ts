@@ -73,7 +73,7 @@ export class Roulette {
         this.weaponsCount = attrs.weaponsCount || 50;
 
         // id приза
-        this.weaponPrizeId = this.randomRange(this.weaponsCount / 2, this.weaponsCount - 3)
+        this.weaponPrizeId = this.randomRange(this.weaponsCount / 2, this.weaponsCount - 5)
 
         this.transitionDuration = attrs.transitionDuration || 10
 
@@ -153,10 +153,8 @@ export class Roulette {
         let el_weapon_width_1_2 = Math.floor(this.itemWidth / 2)
         let el_weapon_width_1_20 = Math.floor(this.itemWidth / 20)
 
-        //TODO составить формулу
-
         // рандомная координата остановки
-        const randStop = (this.weaponsCount - 5) * this.itemWidth +
+        const randStop = (this.weaponPrizeId - 4) * this.itemWidth +
             el_weapon_width_1_2 +
             this.randomRange(el_weapon_width_1_20, (18 * el_weapon_width_1_20))
 
