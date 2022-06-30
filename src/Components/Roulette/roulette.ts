@@ -12,8 +12,6 @@ export class Weapon {
     skin_name: string
     rarity: string
     steam_image: string
-    el: HTMLElement | null
-    element_width: number
 
     constructor(id: number, attrs: weaponAttributes) {
         this.id = id;
@@ -23,98 +21,67 @@ export class Weapon {
         this.skin_name = attrs.skin_name;
         this.rarity = attrs.rarity;
         this.steam_image = attrs.steam_image;
-
-        // DOM-элемент создаётся в рендер рулетки
-        this.el = null;
-
-        this.element_width = 200;
     }
 
 }
 
 export interface rouletteAttributes {
-    weapon_prize_attrs: weaponAttributes
-    weapon_actors_attrs: weaponAttributes[]
-    el_parent: HTMLElement | null
-    beforeParty: () => void
-    afterParty: () => void
+    winner: weaponAttributes
+    weapons: weaponAttributes[]
+
+    rouletteWrapper: HTMLElement | null
+    weaponWrapper: HTMLElement | null
+
+    weaponsCount?: number
+    transitionDuration?: number
 }
 
 // КЛАСС РУЛЕТКИ
 export class Roulette {
 
-    weapon_prize_attrs: any
-    weapon_actors_attrs: any
-    el_parent: HTMLElement | null
-    el: any
-    el_weapons: any
+    winner: weaponAttributes
+    allWeapons: weaponAttributes[]
+
+    rouletteWrapper: HTMLElement | null
+    weaponWrapper: HTMLElement | null
 
     weapons: Weapon[]
 
-    beforeParty: () => void
-    afterParty: () => void
-
     weaponsCount: number
     weaponPrizeId: number
-    spinSecs: number
-    startDelayMsecs: number
-    soundSpinInterval: number
-    imageLoadInterval: number
-    imageLoadWaitMsecs: number
 
-    startSound: string
-    spinSound: string
-    stopSound: string
+    transitionDuration: number
 
     constructor(attrs: rouletteAttributes) {
         // атрибуты для генерации массива weapons
-        this.weapon_prize_attrs = attrs.weapon_prize_attrs;
-        this.weapon_actors_attrs = attrs.weapon_actors_attrs;
+        this.winner = attrs.winner;
+        this.allWeapons = attrs.weapons;
 
         // тут будет всё оружие (оружие-приз + оружие-актёры)
         this.weapons = [];
 
         // родительский DOM-элемент для рулетки
-        this.el_parent = attrs.el_parent;
-
-        // DOM-элемент самой рулетки
-        this.el = null;
+        this.rouletteWrapper = attrs.rouletteWrapper;
 
         // родительский DOM-элемент для DOM-элементов оружия (он вращается)
-        this.el_weapons = null;
-
-        // callback на старте вращения
-        this.beforeParty = attrs.beforeParty;
-
-        // callback по окончании вращения
-        this.afterParty = attrs.afterParty;
+        this.weaponWrapper = attrs.weaponWrapper;
 
         // общее количество оружия
-        this.weaponsCount = 25;
+        this.weaponsCount = attrs.weaponsCount || 50;
 
         // id приза
-        this.weaponPrizeId = this.weaponsCount - 3;
+        this.weaponPrizeId = this.randomRange(this.weaponsCount / 2, this.weaponsCount - 3)
 
-        // время вращения
-        this.spinSecs = 10;
-
-        // время отложенного старта
-        this.startDelayMsecs = 100;
-
-        // интервал синхронизации звуков вращения
-        this.soundSpinInterval = 100;
-
-        // интервал ожидания картинок
-        this.imageLoadInterval = 500;
-
-        // максимальное время ожидания картинок
-        // после этого придётся сдаться и показать битые картинки
-        this.imageLoadWaitMsecs = 10000;
+        this.transitionDuration = attrs.transitionDuration || 10
 
         // звуки
-        this.startSound = 'sound/roulette_start.wav';
-        this.spinSound = 'sound/roulette_spin.wav';
-        this.stopSound = 'sound/roulette_stop.wav';
+        // this.startSound = 'sound/roulette_start.wav';
+        // this.spinSound = 'sound/roulette_spin.wav';
+        // this.stopSound = 'sound/roulette_stop.wav';
+    }
+
+    private randomRange = (min: number, max: number) => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     /** ПАРАМЕТРЫ РУЛЕТКИ
@@ -142,197 +109,60 @@ export class Roulette {
     /**    СОЗДАТЬ ОРУЖИЕ ИЗ АТРИБУТОВ
      ----------------------------------------------------------------------------- */
     set_weapons = () => {
-        let weapons = []
-        let weapon_actors_len = this.weapon_actors_attrs.length
-        let j = 0
+        let weapons: Weapon[] = [] // объявляем массив оружия
+        let weapon_actors_len = this.allWeapons.length  // количество оружия пришедшее с бд
 
-        const set_weapon_actors = (from_i: any, to_i: any) => {
-            let i;
-            for (i = from_i; i <= to_i; i += 1) {
-                weapons[i] = new Weapon(i, this.weapon_actors_attrs[j]);
+        const set_weapon_actors = (from_i: number, to_i: number) => {
+            let j = 0
+            for (let i = from_i; i <= to_i; i += 1) {
+                // создаем оружие с индексом i и атрибутами j
+                weapons[i] = new Weapon(i, this.allWeapons[j]);
                 j = (j === weapon_actors_len - 1) ? 0 : j + 1;
             }
         };
 
+        // нет оружия с бд - ошибка
         if (weapon_actors_len === 0) {
             throw new Error('Ошибка! Нет актёров.');
         }
 
+        /** сетаем оружия в размере количества
+         *  оружия в рулетке с 0 до id приза
+         * */
         set_weapon_actors(0, this.weaponPrizeId - 1);
 
-        weapons[this.weaponPrizeId] = new Weapon(this.weaponPrizeId, this.weapon_prize_attrs);
+        // создаем оружие приз
+        weapons[this.weaponPrizeId] = new Weapon(this.weaponPrizeId, this.winner);
 
+        /**
+         * сетаем оружия в id приза до конца
+         * */
         set_weapon_actors(this.weaponPrizeId + 1, this.weaponsCount - 1);
 
         this.weapons = weapons;
     };
 
-    /** РЕНДЕР
-     -----------------------------------------------------------------------------*/
-    render = () => {
-        let el_roulette = document.createElement('div')
-        let el_target = document.createElement('div')
-        let el_weapons = document.createElement('div')
-
-        // подсчёт загруженных картинок
-        let n_images_loaded = 0
-        let image_load_wait = 0
-        let image_load_interval: any;
-
-        el_roulette.id = 'ev-roulette';
-        el_target.id = 'ev-target';
-        el_weapons.id = 'ev-weapons';
-
-        el_weapons.style.width = (this.weaponsCount * Weapon.prototype.element_width) + 'px';
-
-        this.weapons.forEach((weapon) => {
-            let el_weapon = document.createElement('div')
-            let el_weapon_inner = document.createElement('div')
-            let el_weapon_rarity = document.createElement('div')
-            let el_weapon_img = document.createElement('img')
-            let el_weapon_text = document.createElement('div')
-            let el_weapon_text_name = document.createElement('p')
-            let el_weapon_text_skin_name = document.createElement('p')
-
-            // важно: onload callback перед src
-            el_weapon_img.onload = () => {
-                n_images_loaded += 1;
-            };
-
-            el_weapon_img.src = weapon.steam_image;
-            el_weapon_img.alt = weapon.weapon_name;
-            el_weapon_text_name.textContent = weapon.weapon_name;
-            el_weapon_text_skin_name.textContent = weapon.skin_name;
-
-            el_weapon.className = 'ev-weapon';
-            el_weapon_inner.className = 'ev-weapon-inner';
-            el_weapon_rarity.className = 'ev-weapon-rarity ev-weapon-rarity-' + weapon.rarity;
-            el_weapon_text.className = 'ev-weapon-text';
-
-            el_weapon_text.appendChild(el_weapon_text_name);
-            el_weapon_text.appendChild(el_weapon_text_skin_name);
-            el_weapon_inner.appendChild(el_weapon_rarity);
-            el_weapon_inner.appendChild(el_weapon_img);
-            el_weapon_inner.appendChild(el_weapon_text);
-            el_weapon.appendChild(el_weapon_inner);
-
-            weapon.el = el_weapon;
-
-            el_weapons.appendChild(weapon.el);
-        });
-
-        el_roulette.appendChild(el_target);
-        el_roulette.appendChild(el_weapons);
-
-        /** ждём загрузки всех картинок
-         по окончании начинаем вращаться*/
-        image_load_interval = setInterval(() => {
-            image_load_wait += this.imageLoadInterval;
-
-            // полная боевая готовность или не могу больше ждать
-            if (
-                (n_images_loaded === this.weaponsCount) ||
-                (image_load_wait >= this.imageLoadWaitMsecs)
-            ) {
-                clearInterval(image_load_interval);
-
-                this.el_weapons = el_weapons;
-                this.el = el_roulette;
-
-                this.el_parent?.appendChild(this.el);
-
-                this.spin();
-            }
-        }, this.imageLoadInterval);
-
-    }
-
-    /** УЧУ РУЛЕТКУ ИЗДАВАТЬ ЗВУКИ
-     -----------------------------------------------------------------------------*/
-    make_sound = (sound: string) => {
-        let audio = new Audio(sound);
-        audio.volume = 0.2;
-        audio.play().then(r => console.log(r));
-    };
-
     /** ВРАЩЕНИЕ РУЛЕТКИ
      -----------------------------------------------------------------------------*/
     spin = () => {
-        let el_weapon_width_1_2 = Math.floor(Weapon.prototype.element_width / 2)
-        let el_weapon_width_1_20 = Math.floor(Weapon.prototype.element_width / 20)
-
-        let rand = (min: number, max: number) => {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
+        let el_weapon_width_1_2 = Math.floor(200 / 2)
+        let el_weapon_width_1_20 = Math.floor(200 / 20)
 
         // рандомная координата остановки
-        let rand_stop = (this.weaponsCount - 5) * Weapon.prototype.element_width +
+        let rand_stop = (this.weaponsCount - 5) * 200 +
             el_weapon_width_1_2 +
-            rand(el_weapon_width_1_20, (18 * el_weapon_width_1_20))
-
-        // эти ребята используются для синхронизации звука
-        // (когда мишень совпадает с началом очередного оружия, должно тикать)
-        let sound_spin_interval: any;
-        // считает количество пройденных оружий во время вращения
-        let spin_counter = 0;
+            this.randomRange(el_weapon_width_1_20, (18 * el_weapon_width_1_20))
 
         // анимация теперь через 'transition', а не через 'animation'
         // 'ease-out' -- это плавное замедление рулетки
-        this.el_weapons.style.transition = 'left ' + this.spinSecs + 's ease-out';
+        this.weaponWrapper!.style.transition = `left ${this.transitionDuration}s ease-out`;
 
         // немного отложенный старт
-        // (ибо нельзя сразу установить цсс-свойство 'left')
+        // (ибо нельзя сразу установить css-свойство 'left')
         setTimeout(() => {
-            // перед стартом может быть необходимость что-то сотворить
-            this.beforeParty();
+            this.weaponWrapper!.style.left = '-' + rand_stop + 'px';
+        }, 100);
 
-            this.make_sound(this.startSound);
-
-            this.el_weapons.style.left = '-' + rand_stop + 'px';
-
-            // здесь попытка синхронизировать звук вращения с анимацией
-            sound_spin_interval = setInterval(() => {
-                let current_left = Math.abs(
-                    parseInt(window.getComputedStyle(this.el_weapons).left, 10)
-                )
-                let current_spin_counter = Math.floor(
-                    (current_left + el_weapon_width_1_2) / Weapon.prototype.element_width
-                )
-                // рулетка довращалась до нового оружия
-                if (current_spin_counter > spin_counter) {
-                    spin_counter = current_spin_counter;
-                    this.make_sound(this.spinSound);
-                }
-            }, this.soundSpinInterval);
-
-        }, this.startDelayMsecs);
-
-        /** анимация остановилась
-         значит, рулетка тоже  */
-
-        this.el_weapons.addEventListener('transitionend', () => {
-            clearInterval(sound_spin_interval);
-            this.make_sound(this.stopSound);
-            this.weapons.forEach(weapon => {
-                if (weapon.id !== this.weaponPrizeId) {
-                    weapon.el!.style.opacity = String(0.5);
-                }
-            });
-
-            // всё, рулетка остановилась
-            // дальше можешь делать что-нибудь своё
-            this.afterParty();
-        });
+        return this.weaponPrizeId
     }
-
-    /** ЗАПУСК
-     * -----------------------------------------------------------------------------*/
-    start = () => {
-        // перед рендером нужно создать оружие из атрибутов
-        this.set_weapons();
-
-        // рендер, который вызовет this.spin() после успешной загрузки картинок
-        this.render();
-    };
-
 }

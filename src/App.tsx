@@ -1,18 +1,37 @@
-import React from 'react';
+import React, {useState} from 'react';
 import cl from './App.module.scss';
 import weapons from "./weapons.json"
 import RouletteElement from "./Components/Roulette/RouletteElement";
+import {Roulette, weaponAttributes} from "./Components/Roulette/roulette";
 
 
 function App() {
-    let randomWeapon = weapons[Math.floor(Math.random() * weapons.length)];
+    const [isSpin, setIsSpin] = useState<boolean>(false)
+    const [rouletteWeapons, setRouletteWeapons] = useState<weaponAttributes[]>(weapons)
+    const [weaponPrizeId, setWeaponPrizeId] = useState<number | null>(null)
 
-    function afterParty(){
-        console.log("Начало")
-    }
+    function play() {
+        let winner = weapons[Math.floor(Math.random() * weapons.length)];
 
-    function beforeParty(){
-        console.log("Конец")
+        const rouletteWrapper = document.getElementById('roulette-container')
+        const weaponWrapper = document.getElementById('ev-weapons')
+
+        const roulette = new Roulette({
+            winner,
+            weapons,
+            rouletteWrapper,
+            weaponWrapper,
+            weaponsCount: 100,
+            transitionDuration: 5
+        });
+
+        roulette.set_weapons()
+
+        setRouletteWeapons(roulette.weapons)
+
+        setIsSpin(true)
+
+        setWeaponPrizeId(roulette.spin())
     }
 
     return (
@@ -24,11 +43,11 @@ function App() {
                 когда его напишут...
             </h2>
             <RouletteElement
-                weaponPrizeAttrs={randomWeapon}
-                weaponActorsAttrs={weapons}
-                afterParty={afterParty}
-                beforeParty={beforeParty}
+                setIsSpin={setIsSpin}
+                rouletteWeapons={rouletteWeapons}
+                weaponPrizeId={weaponPrizeId}
             />
+            <button disabled={isSpin} onClick={play}>Play</button>
         </div>
     );
 }
