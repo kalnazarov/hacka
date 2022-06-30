@@ -1,11 +1,19 @@
 .App{
-  margin: 0 10px;
 
-  .title{
-    font-size: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .wrapper {
+    margin: 200px 0;
   }
 
-  .sub_title{
-    font-size: 32px;
+  .button {
+    display: block;
+    margin: 30px auto 0;
+    padding: 5px 120px;
+    border: none;
+    background-color: #6736b1;
+    color: #fff;
   }
 }

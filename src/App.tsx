@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import cl from './App.module.scss';
 import weapons from "./weapons.json"
 import RouletteElement from "./Components/Roulette/RouletteElement";
@@ -12,9 +12,13 @@ function App() {
     const weaponsCount = 50
     const transitionDuration = 5
 
-    function play() {
+    useEffect(() => {
+        load()
+    }, [])
+
+    function load() {
+        console.log("loaded")
         let winner = weapons[Math.floor(Math.random() * weapons.length)];
-        console.log(winner)
         const rouletteWrapper = document.getElementById('roulette-container')
         const weaponWrapper = document.getElementById('ev-weapons')
 
@@ -30,25 +34,27 @@ function App() {
         roulette.set_weapons()
         setRouletteWeapons(roulette.weapons)
 
+        return roulette
+    }
+
+    function play() {
+        console.log("lets play")
+        const roulette = load()
+
         setIsSpin(true)
         setWeaponPrizeId(roulette.spin())
-
     }
 
     return (
         <div className={cl.App}>
-            <h1 className={cl.title}>
-                Здесь будет мотиватор
-            </h1>
-            <h2 className={cl.sub_title}>
-                когда его напишут...
-            </h2>
-            <RouletteElement
-                setIsSpin={setIsSpin}
-                rouletteWeapons={rouletteWeapons}
-                weaponPrizeId={weaponPrizeId}
-            />
-            <button disabled={isSpin} onClick={play}>Play</button>
+            <div className={cl.wrapper}>
+                <RouletteElement
+                    setIsSpin={setIsSpin}
+                    rouletteWeapons={rouletteWeapons}
+                    weaponPrizeId={weaponPrizeId}
+                />
+                <button className={cl.button} disabled={isSpin} onClick={play}>Play</button>
+            </div>
         </div>
     );
 }
