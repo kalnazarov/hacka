@@ -10,6 +10,7 @@ function App() {
     const [rouletteWeapons, setRouletteWeapons] = useState<weaponAttributes[]>(weapons)
     const [weaponPrizeId, setWeaponPrizeId] = useState<number>(-1)
     const [isReplay, setIsReplay] = useState<boolean>(false)
+    const [isSpinEnd, setIsSpinEnd] = useState<boolean>(false)
     const weaponsCount = 150
     const transitionDuration = 15
 
@@ -70,8 +71,11 @@ function App() {
             <div className={cl.wrapper}>
                 <RouletteElement
                     setIsSpin={setIsSpin}
+                    setIsSpinEnd={setIsSpinEnd}
                     rouletteWeapons={rouletteWeapons}
                     weaponPrizeId={weaponPrizeId}
+                    isSpin={isSpin}
+                    isSpinEnd={isSpinEnd}
                 />
                 <button className={cl.button} disabled={isSpin} onClick={play}>Play</button>
             </div>
