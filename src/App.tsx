@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import cl from './App.module.scss';
 import weapons from "./weapons.json"
 import RouletteElement from "./Components/Roulette/RouletteElement";
@@ -13,10 +13,6 @@ function App() {
     const [isSpinEnd, setIsSpinEnd] = useState<boolean>(false)
     const weaponsCount = 150
     const transitionDuration = 15
-
-    useEffect(() => {
-        load()
-    }, [])
 
     function prepare() {
         const weaponWrapper = document.getElementById('ev-weapons')
@@ -49,22 +45,16 @@ function App() {
     function play() {
         if (isReplay) {
             prepare()
-            setIsSpin(true)
+        }
+        setIsSpin(true)
 
-            setTimeout(() => {
-                const roulette = load()
+        const roulette = load()
 
-                setIsSpin(true)
-                setWeaponPrizeId(roulette.spin())
-                setIsReplay(true)
-            }, 1000)
-        } else {
-            const roulette = load()
-
+        setTimeout(() => {
             setIsSpin(true)
             setWeaponPrizeId(roulette.spin())
             setIsReplay(true)
-        }
+        }, 1000)
     }
 
     return (
