@@ -110,11 +110,14 @@ export class Roulette {
 
         const set_weapon_actors = (from_i: number, to_i: number) => {
             let j = 0
+            const createdWeapons: Weapon[] = []
             for (let i = from_i; i <= to_i; i += 1) {
                 // создаем оружие с индексом i и атрибутами j
-                weapons[i] = new Weapon(i, this.allWeapons[j]);
+                createdWeapons.push(new Weapon(i, this.allWeapons[j]))
                 j = (j === weapon_actors_len - 1) ? 0 : j + 1;
             }
+            this.shuffle(createdWeapons)
+            return createdWeapons
         };
 
         // нет оружия с бд - ошибка
@@ -122,20 +125,18 @@ export class Roulette {
             throw new Error('Ошибка! Нет актёров.');
         }
 
-        /** сетаем оружия в размере количества
+        /**
+         * сетаем оружия в размере количества
          *  оружия в рулетке с 0 до id приза
-         * */
-        set_weapon_actors(0, this.weaponPrizeId - 1);
-        this.shuffle(weapons)
+         */
+        weapons = weapons.concat(set_weapon_actors(0, this.weaponPrizeId - 1))
 
         // создаем оружие приз
         weapons[this.weaponPrizeId] = new Weapon(this.weaponPrizeId, this.winner);
-        this.weapons = weapons;
 
-        /**
-         * сетаем оружия в id приза до конца
-         * */
-        set_weapon_actors(this.weaponPrizeId + 1, this.weaponsCount - 1);
+        /** сетаем оружия в id приза до конца */
+        weapons = weapons.concat(set_weapon_actors(this.weaponPrizeId + 1, this.weaponsCount - 1))
+        this.weapons = weapons;
     };
 
     /** ВРАЩЕНИЕ РУЛЕТКИ

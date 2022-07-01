@@ -14,20 +14,21 @@ function App() {
     const weaponsCount = 150
     const transitionDuration = 15
 
-    const rouletteWrapper = document.getElementById('roulette-container')
-    const weaponWrapper = document.getElementById('ev-weapons')
-
     useEffect(() => {
         load()
     }, [])
 
     function prepare() {
+        const weaponWrapper = document.getElementById('ev-weapons')
         weaponWrapper!.style.transition = "none"
         weaponWrapper!.style.left = "0px"
     }
 
     function load() {
         let winner = weapons[Math.floor(Math.random() * weapons.length)];
+
+        const rouletteWrapper = document.getElementById('roulette-container')
+        const weaponWrapper = document.getElementById('ev-weapons')
 
 
         const roulette = new Roulette({
