@@ -68,7 +68,8 @@ function App() {
                     isSpin={isSpin}
                     isSpinEnd={isSpinEnd}
                 />
-                <button className={cl.button} disabled={isSpin} onClick={play}>Play</button>
+                <button className={cl.button} disabled={isSpin} onClick={play}>Roll</button>
+
             </div>
         </div>
     );
