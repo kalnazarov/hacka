@@ -1,3 +1,7 @@
+import startSound from "../../Assets/sound/roulette_start.wav"
+import spinSound from "../../Assets/sound/roulette_spin.wav"
+import endSound from "../../Assets/sound/roulette_stop.wav"
+
 export interface weaponAttributes {
     weapon_name: string,
     skin_name: string
@@ -55,6 +59,10 @@ export class Roulette {
 
     itemWidth: number
 
+    startSound: string
+    spinSound: string
+    stopSound: string
+
     constructor(attrs: rouletteAttributes) {
         // атрибуты для генерации массива weapons
         this.winner = attrs.winner;
@@ -80,13 +88,20 @@ export class Roulette {
         this.itemWidth = attrs.itemWidth || 200
 
         // звуки
-        // this.startSound = 'sound/roulette_start.wav';
-        // this.spinSound = 'sound/roulette_spin.wav';
-        // this.stopSound = 'sound/roulette_stop.wav';
+        this.startSound = startSound;
+        this.spinSound = spinSound;
+        this.stopSound = endSound;
     }
 
     private randomRange = (min: number, max: number) => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    private shuffle = (array: any[]) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
     }
 
     set_weapons = () => {
@@ -111,16 +126,16 @@ export class Roulette {
          *  оружия в рулетке с 0 до id приза
          * */
         set_weapon_actors(0, this.weaponPrizeId - 1);
+        this.shuffle(weapons)
 
         // создаем оружие приз
         weapons[this.weaponPrizeId] = new Weapon(this.weaponPrizeId, this.winner);
+        this.weapons = weapons;
 
         /**
          * сетаем оружия в id приза до конца
          * */
         set_weapon_actors(this.weaponPrizeId + 1, this.weaponsCount - 1);
-
-        this.weapons = weapons;
     };
 
     /** ВРАЩЕНИЕ РУЛЕТКИ
