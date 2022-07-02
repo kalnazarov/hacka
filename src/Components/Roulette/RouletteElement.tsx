@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import cl from "./roulette.module.scss"
 import RouletteItem from "./RouletteItem/RouletteItem";
 import {Roulette, weaponAttributes} from "./roulette";
@@ -21,29 +21,27 @@ const RouletteElement = ({
     const [isSpin, setIsSpin] = useState<boolean>(false)
     const [isSpinEnd, setIsSpinEnd] = useState<boolean>(false)
 
+    const rouletteContainerRef = useRef<HTMLDivElement>(null)
+    const weaponsRef = useRef<HTMLDivElement>(null)
+
     function transitionEndHandler() {
         setIsSpin(false)
         setIsSpinEnd(true)
     }
 
     function prepare() {
-        const weaponWrapper = document.getElementById('ev-weapons')
-        weaponWrapper!.style.transition = "none"
-        weaponWrapper!.style.left = "0px"
+        weaponsRef.current!.style.transition = "none"
+        weaponsRef.current!.style.left = "0px"
     }
 
     function load() {
         let winner = weapons[Math.floor(Math.random() * weapons.length)];
 
-        const rouletteWrapper = document.getElementById('roulette-container')
-        const weaponWrapper = document.getElementById('ev-weapons')
-
-
         const roulette = new Roulette({
             winner,
             weapons,
-            rouletteWrapper,
-            weaponWrapper,
+            rouletteContainerRef,
+            weaponsRef,
             weaponsCount: weaponsCount,
             transitionDuration: transitionDuration
         });
@@ -71,10 +69,10 @@ const RouletteElement = ({
 
     return (
         <div>
-            <div id={"roulette-container"} className={cl.rouletteContainer}>
+            <div ref={rouletteContainerRef} className={cl.rouletteContainer}>
                 <div className={cl.evRoulette}>
                     <div className={cl.evTarget}></div>
-                    <div id={"ev-weapons"} className={cl.evWeapons} onTransitionEnd={transitionEndHandler}>
+                    <div ref={weaponsRef} className={cl.evWeapons} onTransitionEnd={transitionEndHandler}>
                         {rouletteWeapons.map((w, i) => {
                             return <RouletteItem
                                 key={i}

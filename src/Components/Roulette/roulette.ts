@@ -1,6 +1,7 @@
 import startSound from "../../Assets/sound/roulette_start.wav"
 import spinSound from "../../Assets/sound/roulette_spin.wav"
 import endSound from "../../Assets/sound/roulette_stop.wav"
+import {Ref} from "react";
 
 export interface weaponAttributes {
     weapon_name: string,
@@ -33,8 +34,8 @@ export interface rouletteAttributes {
     winner: weaponAttributes
     weapons: weaponAttributes[]
 
-    rouletteWrapper: HTMLElement | null
-    weaponWrapper: HTMLElement | null
+    rouletteContainerRef: Ref<HTMLElement>
+    weaponsRef: Ref<HTMLElement>
 
     weaponsCount?: number
     transitionDuration?: number
@@ -47,8 +48,8 @@ export class Roulette {
     winner: weaponAttributes
     allWeapons: weaponAttributes[]
 
-    rouletteWrapper: HTMLElement | null
-    weaponWrapper: HTMLElement | null
+    rouletteWrapper: Ref<HTMLElement>
+    weaponWrapper: Ref<HTMLElement>
 
     weapons: Weapon[]
 
@@ -72,10 +73,10 @@ export class Roulette {
         this.weapons = [];
 
         // родительский DOM-элемент для рулетки
-        this.rouletteWrapper = attrs.rouletteWrapper;
+        this.rouletteWrapper = attrs.weaponsRef;
 
         // родительский DOM-элемент для DOM-элементов оружия (он вращается)
-        this.weaponWrapper = attrs.weaponWrapper;
+        this.weaponWrapper = attrs.weaponsRef;
 
         // общее количество оружия
         this.weaponsCount = attrs.weaponsCount || 50;
@@ -152,12 +153,14 @@ export class Roulette {
 
         // анимация теперь через 'transition', а не через 'animation'
         // 'ease-out' -- это плавное замедление рулетки
-        this.weaponWrapper!.style.transition = `left ${this.transitionDuration}s ease-out`;
+        // @ts-ignore
+        this.weaponWrapper.current.style.transition = `left ${this.transitionDuration}s ease-out`;
 
         // немного отложенный старт
         // (ибо нельзя сразу установить css-свойство 'left')
         setTimeout(() => {
-            this.weaponWrapper!.style.left = `-${randStop}px`;
+            // @ts-ignore
+            this.weaponWrapper.current.style.left = `-${randStop}px`;
         }, 100);
 
         return this.weaponPrizeId
