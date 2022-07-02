@@ -6,7 +6,7 @@ export interface weaponAttributes {
     weapon_name: string,
     skin_name: string
     rarity: string
-    steam_image: string
+    steam_image: string,
 }
 
 // КЛАСС ОРУЖИЯ

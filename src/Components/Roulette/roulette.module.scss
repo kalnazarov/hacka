@@ -109,3 +109,19 @@ $rouletteHeight: 200px;
 .ev-weapon-text p:first-child {
   margin-top: 10px;
 }
+
+.button {
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  display: block;
+  margin: 30px auto 0;
+  padding: 5px 120px;
+  border: none;
+  background-color: #a7281a;
+  color: #fff;
+
+  &:disabled {
+    background-color: #541710;
+    color: rgba(#fff, 0.6);
+  }
+}
