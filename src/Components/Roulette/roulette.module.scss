@@ -1,5 +1,15 @@
 $rouletteHeight: 200px;
 
+.rouletteWrapper {
+  margin-top: 350px;
+  position: relative;
+}
+
+.history {
+  position: absolute;
+  top: 10px;
+}
+
 .evRoulette {
   margin: 0 auto;
   width: 1400px;
@@ -114,11 +124,11 @@ $rouletteHeight: 200px;
   font-size: 16px;
   font-family: 'Montserrat', sans-serif;
   display: block;
-  margin: 30px auto 0;
   padding: 5px 120px;
   border: none;
   background-color: #a7281a;
   color: #fff;
+  margin: 30px auto 0;
 
   &:disabled {
     background-color: #541710;

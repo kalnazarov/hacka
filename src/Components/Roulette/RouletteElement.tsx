@@ -2,6 +2,7 @@ import React, {useRef, useState} from 'react';
 import cl from "./roulette.module.scss"
 import RouletteItem from "./RouletteItem/RouletteItem";
 import {Roulette, weaponAttributes} from "./roulette";
+import RouletteHistory from "./RouletteHistory/RouletteHistory";
 
 interface RouletteElementParams {
     weapons: weaponAttributes[],
@@ -20,11 +21,13 @@ const RouletteElement = ({
     const [isReplay, setIsReplay] = useState<boolean>(false)
     const [isSpin, setIsSpin] = useState<boolean>(false)
     const [isSpinEnd, setIsSpinEnd] = useState<boolean>(false)
+    const [winHistory, setWinHistory] = useState<weaponAttributes[]>([])
 
     const rouletteContainerRef = useRef<HTMLDivElement>(null)
     const weaponsRef = useRef<HTMLDivElement>(null)
 
     function transitionEndHandler() {
+        setWinHistory(winHistory.concat(rouletteWeapons[weaponPrizeId]))
         setIsSpin(false)
         setIsSpinEnd(true)
     }
@@ -69,25 +72,30 @@ const RouletteElement = ({
 
     return (
         <div>
-            <div ref={rouletteContainerRef} className={cl.rouletteContainer}>
-                <div className={cl.evRoulette}>
-                    <div className={cl.evTarget}></div>
-                    <div ref={weaponsRef} className={cl.evWeapons} onTransitionEnd={transitionEndHandler}>
-                        {rouletteWeapons.map((w, i) => {
-                            return <RouletteItem
-                                key={i}
-                                id={i}
-                                isLoser={(i !== weaponPrizeId) && !isSpin && isSpinEnd}
-                                weapon_name={w.weapon_name}
-                                skin_name={w.skin_name}
-                                rarity={w.rarity}
-                                steam_image={w.steam_image}
-                            />
-                        })}
+            <div className={cl.history}>
+                {winHistory.length > 0 && <RouletteHistory winHistory={winHistory}/>}
+            </div>
+            <div className={cl.rouletteWrapper}>
+                <div ref={rouletteContainerRef}>
+                    <div className={cl.evRoulette}>
+                        <div className={cl.evTarget}></div>
+                        <div ref={weaponsRef} className={cl.evWeapons} onTransitionEnd={transitionEndHandler}>
+                            {rouletteWeapons.map((w, i) => {
+                                return <RouletteItem
+                                    key={i}
+                                    id={i}
+                                    isLoser={(i !== weaponPrizeId) && !isSpin && isSpinEnd}
+                                    weapon_name={w.weapon_name}
+                                    skin_name={w.skin_name}
+                                    rarity={w.rarity}
+                                    steam_image={w.steam_image}
+                                />
+                            })}
+                        </div>
                     </div>
                 </div>
+                <button className={cl.button} disabled={isSpin} onClick={play}>Roll</button>
             </div>
-            <button className={cl.button} disabled={isSpin} onClick={play}>Roll</button>
         </div>
     );
 };

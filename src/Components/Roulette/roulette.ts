@@ -160,7 +160,7 @@ export class Roulette {
         // (ибо нельзя сразу установить css-свойство 'left')
         setTimeout(() => {
             // @ts-ignore
-            this.weaponWrapper.current.style.left = `-${randStop}px`;
+            this.weaponWrapper!.current.style.left = `-${randStop}px`;
         }, 100);
 
         return this.weaponPrizeId
