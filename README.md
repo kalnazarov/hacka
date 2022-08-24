@@ -1,4 +1,3 @@
-# Roulette
+# Рулетка СS:GO
 
-Try it yourself:
-https://monodev-roulette.stormkit.dev/
+[Демо](https://monodev-roulette.stormkit.dev/)
