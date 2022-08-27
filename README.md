@@ -1,3 +1,1 @@
-# Рулетка СS:GO
-
-[Демо](https://monodev-roulette.stormkit.dev/)
+# Рулетка СS:GO написанная на React.js и TypeScript

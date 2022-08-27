@@ -1,7 +1,7 @@
 import React from 'react';
 import cl from './App.module.scss';
-import RouletteElement from "./Components/Roulette/RouletteElement";
 import weapons from "./weapons.json"
+import McRoulette from "./Components/Roulette/McRoulette";
 
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
     return (
         <div className={cl.App}>
             <div className={cl.wrapper}>
-                <RouletteElement
+                <McRoulette
                     weapons={weapons}
                     weaponsCount={weaponsCount}
                     transitionDuration={transitionDuration}

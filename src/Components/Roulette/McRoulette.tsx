@@ -1,8 +1,7 @@
 import React, {useRef, useState} from 'react';
 import cl from "./roulette.module.scss"
 import RouletteItem from "./RouletteItem/RouletteItem";
-import {Roulette, weaponAttributes} from "./roulette";
-import RouletteHistory from "./RouletteHistory/RouletteHistory";
+import {Roulette, weaponAttributes} from "../../roulette.classes";
 
 interface RouletteElementParams {
     weapons: weaponAttributes[],
@@ -10,7 +9,7 @@ interface RouletteElementParams {
     transitionDuration: number
 }
 
-const RouletteElement = ({
+const McRoulette = ({
                              weapons,
                              weaponsCount,
                              transitionDuration
@@ -72,9 +71,6 @@ const RouletteElement = ({
 
     return (
         <div>
-            <div className={cl.history}>
-                {winHistory.length > 0 && <RouletteHistory winHistory={winHistory}/>}
-            </div>
             <div className={cl.rouletteWrapper}>
                 <div ref={rouletteContainerRef}>
                     <div className={cl.evRoulette}>
@@ -100,4 +96,4 @@ const RouletteElement = ({
     );
 };
 
-export default RouletteElement;
+export default McRoulette;

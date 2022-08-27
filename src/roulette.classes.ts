@@ -1,6 +1,3 @@
-import startSound from "../../Assets/sound/roulette_start.wav"
-import spinSound from "../../Assets/sound/roulette_spin.wav"
-import endSound from "../../Assets/sound/roulette_stop.wav"
 import {Ref} from "react";
 
 export interface weaponAttributes {
@@ -60,10 +57,6 @@ export class Roulette {
 
     itemWidth: number
 
-    startSound: string
-    spinSound: string
-    stopSound: string
-
     constructor(attrs: rouletteAttributes) {
         // атрибуты для генерации массива weapons
         this.winner = attrs.winner;
@@ -87,11 +80,6 @@ export class Roulette {
         this.transitionDuration = attrs.transitionDuration || 10
 
         this.itemWidth = attrs.itemWidth || 200
-
-        // звуки
-        this.startSound = startSound;
-        this.spinSound = spinSound;
-        this.stopSound = endSound;
     }
 
     private randomRange = (min: number, max: number) => {
