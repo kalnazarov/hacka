@@ -1,0 +1,281 @@
+{
+  "products": [
+    {
+      "name": "AK-47",
+      "description": "Создайте свою легенду о Бабе-Яге, девочке, которую обвинили в колдовстве и выгнали из дома. Освойте стрельбу из лука, научитесь творить магию и раскройте мрачные тайны пышущего жизнью сказочного мира, навеянного славянской мифологией.",
+      "price": 11,
+      "picture": "https://key-drop.gg/uploads/skins/SPILL.png",
+      "type": "AK-47",
+      "video": "https://www.youtube.com/embed/C5S58VSQAU8",
+      "id": 1
+    },
+    {
+      "name": "Karambit",
+      "description": "Tom Clancy's Rainbow Six® Осада — это элитный тактический командный шутер, где побеждает сторона, которая лучше продумает и исполнит свой план.",
+      "price": 53,
+      "picture": "https://key-drop.gg/uploads/skins/SURFACE.png",
+      "type": "knife",
+      "video": "https://www.youtube.com/embed/YlVf0XCybmg",
+      "id": 2,
+      "commit": ""
+    },
+    {
+      "name": "Bayonet",
+      "description": "Timewell: Trail of Celestes is an old-school story-driven 4 DOF 3D space shooter RPG. As A.I. SAT-V, explore exotic planets and fight with Constructs in an ever-deepening plot. Change her skills and adaptations on the fly. May you guide SAT-V to her destiny?",
+      "price": 12,
+      "picture": "https://key-drop.gg/uploads/skins/MIST.png",
+      "type": "knife",
+      "video": "https://www.youtube.com/embed/pYQ0Xtrqp18",
+      "id": 3
+    },
+    {
+      "name": "USP",
+      "description": "After the unexpected death of a close friend, Kristina returns to her hometown looking for answers, only to unearth a string of dark secrets. I Saw Black Clouds is an interactive psychological thriller with supernatural elements and branching storylines.",
+      "price": 12,
+      "picture": "https://key-drop.gg/uploads/skins/ZAP.png",
+      "type": "pistol",
+      "video": "https://kg-portal.ru/t43636/",
+      "id": 4,
+      "commit": "fdfsdfwerf"
+    },
+    {
+      "name": "AWP",
+      "description": "Погрузитесь в приключенческую игру в игровом комиксе ручной работы. Познакомьтесь с пугающе реалистичной реальностью, где права человека постепенно умирают. Присоединитесь к восстанию и решайте головоломки в мрачном дождливом городе, который отчаянно нуждается в правосудии.",
+      "price": 29,
+      "picture": "https://key-drop.gg/uploads/skins/PICKY.png",
+      "type": "AWP",
+      "video": "https://www.youtube.com/embed/gOjZQs38I_g",
+      "id": 5,
+      "commit": "24234234234"
+    },
+    {
+      "name": "Spark",
+      "description": "Легендарный Сэкбой приходит с PlayStation® на ПК, чтобы участвовать в грандиозном трёхмерном платформенном приключении. • Эпическое путешествие с платформенными испытаниями. • Захватывающее управление. • Хаотичная, весёлая и творческая совместная игра.",
+      "price": 39,
+      "picture": "https://key-drop.gg/uploads/skins/SPARK.png",
+      "type": "knife",
+      "video": "https://www.youtube.com/embed/VCyUSUpgvJE",
+      "id": 7
+    },
+    {
+      "name": "Daggers",
+      "description": "Бэтмен мёртв. Теперь всё зависит от семьи Бэтмена: Бэтгёрл, Найтвинга, Красного Колпака и Робина. Только они способны защитить Готэм-Сити.",
+      "price": 12,
+      "picture": "https://key-drop.gg/uploads/skins/DAGGERS.png",
+      "type": "knife",
+      "video": "https://www.youtube.com/embed/abVSpCJ2brc",
+      "id": 8,
+      "commit": "123123123"
+    },
+    {
+      "name": "Perfect",
+      "description": "Присоединяйтесь к более чем 20 миллионам игроков и попробуйте совершенно особый тип королевской битвы с Realm Royale Reforged! Выберите свой класс, создайте смертоносное оружие и освойте потрясающие способности, чтобы выстоять и победить. Отправляйтесь вперед в одиночестве или собирайте команду, чтобы исследовать удивительный мир и спасаться от смертоносного тумана.",
+      "price": 24,
+      "picture": "https://key-drop.gg/uploads/skins/PERFECT.png",
+      "type": "knife",
+      "video": "https://www.youtube.com/embed/A276htNwAMo",
+      "id": 9,
+      "commit": "qweqweqwe"
+    },
+    {
+      "name": "Energy",
+      "description": "Единственный путь — вверх! Дотянитесь до неба с авторским комплектом «Небоскрёбы» (Skyscrapers) от Feindbold. В комплект включено 24 уникальных небоскрёба и 20 их вариаций в стиле узнаваемых зданий со всего мира.",
+      "price": 21,
+      "picture": "https://key-drop.gg/uploads/skins/ENERGY1.png",
+      "type": "AK-47",
+      "video": "https://www.youtube.com/embed/ez8Rfyi0UJw",
+      "id": 10
+    },
+    {
+      "name": "Sharp",
+      "description": "Действие игры Dishonored 2 разворачивается спустя пятнадцать лет после победы над лордом-регентом. Необычный враг отнял трон у императрицы Эмили Колдуин. Играя за Эмили или Корво, отправляйтесь в Карнаку, чтобы выследить ваших врагов и вернуть то, что принадлежит вам по праву.",
+      "price": 29,
+      "picture": "https://key-drop.gg/uploads/skins/SHARP.png",
+      "type": "knife",
+      "video": "https://www.youtube.com/embed/7bLNC8VDTlQ",
+      "id": 12,
+      "commit": "крутая игра"
+    },
+    {
+      "name": "Swap",
+      "description": "Back to the past, we're landing in prehistorical time! Dive back into Joe & Mac's adventures, the quirky duet ready to smash everything ontheir way to save their village, even dinosaurs!",
+      "price": 13,
+      "picture": "https://key-drop.gg/uploads/skins/SWAP.png",
+      "type": "knife",
+      "video": "https://www.youtube.com/embed/Lkg1IBf__kk",
+      "id": 14
+    },
+    {
+      "name": "DragonLor",
+      "description": "Fangs — командная игра 4 на 4 в жанре MOBA, созданная воображением гейм-дизайнера Steve «Guinsoo» Feak. Это стратегическая игра, где каждый навык способен принести вам славу или поражение. Подстраивайте героев под свой стиль игры, открывая и заменяя присущие им аугментации.",
+      "price": 27,
+      "picture": "https://key-drop.gg/uploads/skins/SIGNAL.png",
+      "type": "AWP",
+      "video": "https://www.youtube.com/embed/KMa9YcXjqpg",
+      "id": 15
+    },
+    {
+      "name": "Butterfly",
+      "description": "Игра про строительство фабрики с глубокой мекханикой и расслабляющей атмосферой. Налаживайте производство на многоуровневой карте, производите и продавайте товары котам и анализируйте данные при помощи машинного обучения, чтобы достичь КОТопии!",
+      "price": 13,
+      "picture": "https://key-drop.gg/uploads/skins/SMART.png",
+      "type": "knife",
+      "video": "https://www.youtube.com/embed/5KT2-bHSmNk",
+      "id": 16
+    },
+    {
+      "name": "Capital",
+      "description": "Отправляйтесь в адреналиновый мир современного революционного сопротивления: живописные пейзажи, жаркие перестрелки и множество уникальных особенностей геймплея. Пора вступить в борьбу! Играйте в БЕСПЛАТНУЮ ВЕРСИЮ Far Cry® 6 и узнайте, почему, по мнению GAME INFORMER, это беспрерывный экстрим от начала до конца! Приобретите полную версию игры после – весь ваш прогресс сохранится.",
+      "price": 13,
+      "picture": "https://key-drop.gg/uploads/skins/CAPITAL.png",
+      "type": "AWP",
+      "video": "https://www.youtube.com/embed/YnLgFTLa4To",
+      "id": 17,
+      "commit": ""
+    },
+    {
+      "name": "TECh",
+      "description": "Paramnesia is an interactive detective visual novel where Maria, the protagonist of this story, is a member of two radical sects with contradictory opinions. Delve into her mind to understand herself and the truth.",
+      "price": 135,
+      "picture": "https://key-drop.gg/uploads/skins/TECH.png",
+      "type": "knife",
+      "video": "https://www.youtube.com/embed/vtNQEZe26vQ",
+      "id": 18
+    },
+    {
+      "name": "M4a1-s",
+      "description": "Cross blades with space knights in an epic roguelike where the futuristic and the medieval collide! Battle, loot and upgrade your way across the galaxy, defeating rival ships in gripping melee combat on a quest to save your kingdom from destruction.",
+      "price": 135,
+      "picture": "https://key-drop.gg/uploads/skins/1PROFIT2.png",
+      "type": "m4",
+      "video": "https://www.youtube.com/embed/rZtnuTw78aw",
+      "id": 19
+    },
+    {
+      "name": "Lord",
+      "description": "Danger Forever is 3D Shoot'Em Up with RPG elements. Lone human rides her mecha-dragon through a hostile world of mechanoids and techno-demons.",
+      "price": 135,
+      "picture": "https://key-drop.gg/uploads/skins/LORD2.png",
+      "type": "knife",
+      "video": "https://www.youtube.com/embed/4qRlfJ3Cwrw",
+      "id": 20
+    },
+    {
+      "name": "Token",
+      "description": "Сражайтесь за галактическое господство на стороне одной из трёх уникальных рас в стратегии в реальном времени невиданного масштаба! Вы будете исследовать, расширять, эксплуатировать и уничтожать, используя военную силу, дипломатию, торговлю, культурное влияние и другие тактики негласной работы.",
+      "price": 135,
+      "picture": "https://key-drop.gg/uploads/skins/TOKEN2.png",
+      "type": "knife",
+      "video": "https://www.youtube.com/embed/d_KcI61tdgI",
+      "id": 21
+    },
+    {
+      "name": "Rocket",
+      "description": "Действие игры Dishonored 2 разворачивается спустя пятнадцать лет после победы над лордом-регентом. Необычный враг отнял трон у императрицы Эмили Колдуин. Играя за Эмили или Корво, отправляйтесь в Карнаку, чтобы выследить ваших врагов и вернуть то, что принадлежит вам по праву.",
+      "price": 29,
+      "picture": "https://key-drop.gg/uploads/skins/ROCKET2.png",
+      "type": "knife",
+      "video": "https://www.youtube.com/embed/7bLNC8VDTlQ",
+      "id": 32
+    },
+    {
+      "name": "Daggers",
+      "description": "Даже маленький человек может повлиять на большие события. Помогите Альбе спасти её прекрасный остров и его природу. А возможно, устроить революцию.",
+      "price": 8.99,
+      "picture": "https://key-drop.gg/uploads/skins/1KNIFE3.png",
+      "type": "knife",
+      "video": "https://www.youtube.com/embed/nCWidTG_6to",
+      "id": 33,
+      "commit": ""
+    },
+    {
+      "name": "Foster",
+      "description": "С момента событий The Sleeping King прошло несколько веков, и Царь минотавров вернулся... и это ваша вина! Лили вновь отправляется в классическое приключение с битвами и головоломками!",
+      "price": 8.49,
+      "picture": "https://key-drop.gg/uploads/skins/FOSTER.png",
+      "type": "pistol",
+      "video": "https://www.youtube.com/embed/SQTcL91TA3Y",
+      "id": 34
+    },
+    {
+      "name": "Predator",
+      "description": "Создайте команду, разработайте собственный стиль управления и попробуйте основать династию. Начните своё путешествие к футбольной славе. ",
+      "price": 39.99,
+      "picture": "https://key-drop.gg/uploads/skins/PREDATOR.png",
+      "type": "m4",
+      "video": "https://www.youtube.com/embed/ISJxT7VLzYg",
+      "id": 35
+    },
+    {
+      "name": "Optimal",
+      "description": "Узнайте историю ассасина Арбааза и исследуйте колониальную Индию в скрытном 2,5D-приключении. • Путешествуйте по великолепной Индии XIX века и её легендарным местам. ",
+      "price": 5.49,
+      "picture": "https://key-drop.gg/uploads/skins/OPTIMAL.png",
+      "type": "AK-47",
+      "video": "https://www.youtube.com/embed/TLFE5Kwhm1g",
+      "id": 36
+    },
+    {
+      "name": "Azimov",
+      "description": "Исследуйте постоянно меняющиеся уровни с тремя различными игровыми режимами в Wonderputt Forever, приключенческой игре в мини-гольф.",
+      "price": 4.99,
+      "picture": "https://key-drop.gg/uploads/skins/SOLAR.png",
+      "type": "AWP",
+      "video": "https://www.youtube.com/embed/bLS8AEHBPR8",
+      "id": 37
+    },
+    {
+      "name": "Wind",
+      "description": "Откройте для себя мрачную изнанку вселенной Marvel в новой тактической ролевой игре, где под вашим началом будет сражаться Железный Человек, Росомаха, Капитан Америка, Призрачный Гонщик, Блэйд и другие герои. ",
+      "price": 44.99,
+      "picture": "https://key-drop.gg/uploads/skins/WIND.png",
+      "type": "knife",
+      "video": "https://www.youtube.com/embed/kTHMbNo4-n8",
+      "id": 38
+    },
+    {
+      "name": "Ruby",
+      "description": "dsdwewe",
+      "price": 2,
+      "picture": "https://key-drop.gg/uploads/skins/433.png",
+      "type": "Deagle",
+      "id": 55
+    },
+    {
+      "name": "Shark",
+      "description": "The Shapeshifting Detective — это FMV-игра о сверхъестественном убийстве, в которой вы играете за детектива, который может превращаться в других персонажей, что позволяет вам разблокировать секретные разговоры и личные встречи.",
+      "price": 6.99,
+      "picture": "https://key-drop.gg/uploads/skins/532.png",
+      "type": "Mag7",
+      "video": "https://www.youtube.com/embed/3t-uN6sEFCI",
+      "id": 51
+    },
+    {
+      "name": "Wrap",
+      "description": "Приключенческий ужастик, в котором надо выживать. Играйте за группу персонажей, исследуя изолированную деревню, в которой проводятся древние обряды. Её запутанные дороги будут меняться каждый раз, когда вы потеряете всех своих персонажей.",
+      "price": 9.99,
+      "picture": "https://key-drop.gg/uploads/skins/235.png",
+      "type": "m4",
+      "video": "https://www.youtube.com/embed/q-EEIVQDCwU",
+      "id": 52
+    },
+    {
+      "name": "Samurai",
+      "description": "Maid of Sker — это хоррор от первого лица, действие которого происходит в отдаленном отеле с кровавой и жуткой историей из британского фольклора. Бросьте вызов кошмарам Безмолвных. Не паникуйте… даже не дышите!",
+      "price": 12.99,
+      "picture": "https://key-drop.gg/uploads/skins/147.png",
+      "type": "AWP",
+      "video": "https://www.youtube.com/embed/cTbDOXIDZRo",
+      "id": 53
+    },
+    {
+      "name": "Atum",
+      "description": "Nadir — это roguelike-конструктор колод с изюминкой: цена разыгрывания карты — это реакция врага, которую вы можете предсказать. Создавайте свои собственные карты, чтобы сразить могущественных демонов. Собирайте ресурсы, расширяйте свой город, набирайтесь сил и покоряйте подземный мир.",
+      "price": 9.99,
+      "picture": "https://key-drop.gg/uploads/skins/336.png",
+      "type": "AK-47",
+      "video": "https://www.youtube.com/embed/NkA_O3iT4zM",
+      "id": 54
+    }
+  ]
+}
